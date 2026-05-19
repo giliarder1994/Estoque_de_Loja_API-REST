@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+      /* ── Linguagem ─────────────────────────────────────────────── */
+      "target": "ES2022",           // sintaxe moderna: top-level await, etc.
+      "lib": ["ES2022"],
+  
+      /* ── Módulos ────────────────────────────────────────────────── */
+      "module": "NodeNext",         // emite import/export nativos
+      "moduleResolution": "NodeNext", // resolve .js em imports, package.json exports
+      "rootDir": "src",
+      "outDir": "dist",
+  
+      /* ── Rigor de tipos ─────────────────────────────────────────── */
+      "strict": true,               // habilita todo o conjunto strict
+      "noUncheckedIndexedAccess": true,  // array[i] pode ser undefined
+      "noImplicitReturns": true,    // toda branch deve retornar
+      "noFallthroughCasesInSwitch": true,
+  
+      /* ── Interop ────────────────────────────────────────────────── */
+      "esModuleInterop": true,      // import defaultExport de módulos CJS
+      "forceConsistentCasingInFileNames": true,
+  
+      /* ── Extras ─────────────────────────────────────────────────── */
+      "declaration": true,          // gera .d.ts
+      "sourceMap": true,            // facilita debug
+      "skipLibCheck": true          // ignora erros em .d.ts de terceiros
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist", "tests"]
+  }
