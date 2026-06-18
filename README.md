@@ -1,179 +1,221 @@
 # 💰 Estoque de Loja - API REST
 
-API REST para gerenciamento de estoque de produtos, desenvolvida com **Node.js**, **Express**, **TypeScript** e **MySQL**. O sistema permite autenticação de usuários, controle completo de produtos e proteção de rotas utilizando JWT, seguindo uma arquitetura organizada, escalável e fortemente tipada.
+API REST para gerenciamento de estoque de produtos, desenvolvida com **Node.js**, **Express**, **TypeScript** e **MySQL**.
+O sistema permite autenticação de usuários, controle completo de produtos e proteção de rotas utilizando JWT, seguindo uma arquitetura organizada, escalável e fortemente tipada.
 
 ---
 
-## 🚀 Tecnologias
+# 🚀 Tecnologias
 
-| Tecnologia | Descrição |
-|---|---|
-| **Node.js** | Ambiente de execução JavaScript |
-| **TypeScript** | Superset tipado do JavaScript |
-| **Express** | Framework web para APIs REST |
-| **MySQL** | Banco de dados relacional |
-| **mysql2** | Driver MySQL com suporte a Async/Await |
-| **JWT (JSON Web Token)** | Autenticação segura |
-| **bcryptjs** | Criptografia de senhas |
-| **dotenv** | Gerenciamento de variáveis de ambiente |
-| **tsx** | Execução TypeScript em desenvolvimento |
+* **Node.js** — Ambiente de execução JavaScript
+* **TypeScript** — Superset tipado do JavaScript
+* **Express** — Framework web para APIs REST
+* **MySQL** — Banco de dados relacional
+* **mysql2** — Driver MySQL com suporte a Async/Await
+* **JWT (JSON Web Token)** — Autenticação segura
+* **bcryptjs** — Criptografia de senhas
+* **dotenv** — Gerenciamento de variáveis de ambiente
+* **cors** — Liberação de acesso entre aplicações
+* **tsx** — Execução TypeScript em desenvolvimento
+* **Jest** — Framework de testes
+* **Supertest** — Testes de integração para APIs
 
 ---
 
-## 📁 Estrutura do Projeto
+# 📁 Estrutura do Projeto
 
-```
+```bash
 src/
  ├── config/              # Configuração de conexão com MySQL
- ├── controllers/         # Controle das requisições HTTP
+ │
+ ├── controllers/         # Regras das requisições HTTP
+ │
  ├── middlewares/         # Autenticação e tratamento de erros
+ │
  ├── routes/              # Endpoints da aplicação
+ │
  ├── services/            # Regras de negócio e queries SQL
+ │
  ├── types/               # Tipagens globais da aplicação
+ │
  ├── app.ts               # Configuração do Express
- ├── criarTabelas.ts      # Script de criação das tabelas
  └── server.ts            # Inicialização do servidor
+
+sql/
+ └── setup.sql            # Script de criação do banco e tabelas
+
+tests/                    # Testes unitários e integração
 
 package.json
 tsconfig.json
+jest.config.cjs
 ```
 
 ---
 
-## ⚙️ Funcionalidades
+# ⚙️ Funcionalidades
 
-### 🔐 Autenticação
+## 🔐 Autenticação
 
-- Cadastro de usuários
-- Login com geração de token JWT
-- Rotas protegidas por middleware
-- Senhas criptografadas com bcryptjs
-
-### 📦 Produtos
-
-- Criar produtos
-- Listar produtos com **paginação**
-- Filtrar produtos por **categoria**
-- Buscar produto por ID
-- Atualizar produtos
-- Remover produtos
+* Cadastro de usuários
+* Login com JWT
+* Rotas protegidas
+* Criptografia de senha com bcryptjs
 
 ---
 
-## 🧠 Recursos Técnicos Implementados
+## 📦 Produtos
 
-### ✅ Segurança
-
-- Autenticação JWT
-- Middleware de proteção de rotas
-- Senhas criptografadas com bcryptjs
-- Validação de payloads
-- Tratamento centralizado de erros
-
-### 🏗️ Arquitetura em Camadas
-
-O projeto segue o padrão **Controller → Service → Repository**, com separação clara de responsabilidades:
-
-- **Controllers** → Controle das requisições HTTP
-- **Services** → Regras de negócio e queries SQL
-- **Middlewares** → Autenticação e tratamento de erros
-- **Routes** → Definição das rotas
-- **Types** → Centralização das tipagens TypeScript
-- **Config** → Configuração do banco de dados
+* Criar produtos
+* Listar produtos
+* Buscar produto por ID
+* Atualizar produtos
+* Remover produtos
+* Paginação de resultados
+* Filtro por categoria
 
 ---
 
-## 🗄️ Estrutura do Banco de Dados
+# 🧠 Recursos Técnicos Implementados
 
-O sistema possui **2 tabelas** principais:
+## ✅ Segurança
 
-### 👤 `usuarios`
+* Autenticação JWT
+* Middleware de proteção de rotas
+* Senhas criptografadas
+* Validação de payloads
+* Tratamento centralizado de erros
+
+---
+
+## 🧪 Testes Automatizados
+
+O projeto possui testes cobrindo:
+
+* Fluxos de autenticação
+* Rotas protegidas
+* Cadastro de produtos
+* Validações de erros
+* Usuários duplicados
+* Tokens inválidos
+* Regras de negócio
+
+---
+
+# 🗄️ Estrutura do Banco de Dados
+
+O sistema possui 2 tabelas principais:
+
+## 👤 usuarios
 
 Responsável pelo armazenamento dos usuários da aplicação.
 
-| Campo | Tipo |
-|---|---|
-| `id` | INT (PK, AUTO_INCREMENT) |
-| `nome` | VARCHAR |
-| `email` | VARCHAR (único) |
-| `senha` | VARCHAR (hash bcrypt) |
-| `criado_em` | TIMESTAMP |
+Campos principais:
 
-### 📦 `produtos`
-
-Responsável pelo controle de estoque dos produtos.
-
-| Campo | Tipo |
-|---|---|
-| `id` | INT (PK, AUTO_INCREMENT) |
-| `nome` | VARCHAR |
-| `categoria` | VARCHAR (opcional) |
-| `preco` | DECIMAL |
-| `quantidade` | INT |
-| `criado_em` | TIMESTAMP |
+* id
+* nome
+* email
+* senha
 
 ---
 
-## ⚙️ Como rodar localmente
+## 📦 produtos
 
-### 1. Clone o repositório
+Responsável pelo controle de estoque dos produtos.
+
+Campos principais:
+
+* id
+* nome
+* categoria
+* preco
+* quantidade
+
+---
+
+# ⚙️ Como rodar localmente
+
+## 1. Clone o repositório
 
 ```bash
 git clone https://github.com/seu-usuario/estoque-loja-typescript.git
+
 cd estoque-loja-typescript
 ```
 
-### 2. Instale as dependências
+---
+
+## 2. Instale as dependências
 
 ```bash
 npm install
 ```
 
-### 3. Configure as variáveis de ambiente
+---
+
+## 3. Configure as variáveis de ambiente
 
 Crie um arquivo `.env` na raiz do projeto:
 
 ```env
 PORT=3000
+
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=sua_senha
 DB_NAME=estoque_loja
 DB_PORT=3306
+
 JWT_SECRET=sua_chave_secreta
 ```
 
-### 4. Criar banco e tabelas
+---
 
-As tabelas são criadas automaticamente pelo script src/criarTabelas.ts. Para executá-lo manualmente:
+## 4. Criar banco e tabelas
+
+Execute o script SQL:
 
 ```bash
 npm run db:setup
 ```
 
-### 5. Rodar em desenvolvimento
+Exemplo do script no `package.json`:
+
+```json
+"db:setup": "mysql -u root -p < sql/setup.sql"
+```
+
+---
+
+## 5. Rodar em desenvolvimento
 
 ```bash
 npm run dev
 ```
 
-O servidor iniciará automaticamente em:
+Servidor disponível em:
 
-```
+```bash
 http://localhost:3000
 ```
 
-> O script `dev` já executa o `db:setup` antes de iniciar o servidor.
+---
 
-### 6. Gerar build TypeScript
+## 6. Gerar build TypeScript
 
 ```bash
 npm run build
 ```
 
-Os arquivos compilados serão gerados em `dist/`.
+Os arquivos compilados serão gerados em:
 
-### 7. Executar versão compilada
+```bash
+dist/
+```
+
+---
+
+## 7. Executar versão compilada
 
 ```bash
 npm start
@@ -181,44 +223,55 @@ npm start
 
 ---
 
-## 📋 Principais Rotas
+# 📋 Principais Rotas
 
-### 🔐 Autenticação
+# 🔐 Autenticação
 
-| Método | Rota | Descrição |
-|---|---|---|
-| `POST` | `/auth/registrar` | Cadastro de usuário |
-| `POST` | `/auth/login` | Login e geração de token |
-
-### 📦 Produtos (🔒 requer token JWT)
-
-| Método | Rota | Descrição |
-|---|---|---|
-| `GET` | `/produtos` | Listar produtos (com paginação e filtro por categoria) |
-| `GET` | `/produtos/:id` | Buscar produto por ID |
-| `POST` | `/produtos` | Criar produto |
-| `PUT` | `/produtos/:id` | Atualizar produto |
-| `DELETE` | `/produtos/:id` | Remover produto |
-
-> **Parâmetros de query disponíveis no GET `/produtos`:**
-> - `categoria` — filtra por categoria
-> - `limite` — quantidade de itens por página (padrão: 10)
-> - `pagina` — número da página (padrão: 1)
+| Método | Rota            | Descrição                |
+| ------ | --------------- | ------------------------ |
+| POST   | /auth/registrar | Cadastro de usuário      |
+| POST   | /auth/login     | Login e geração de token |
 
 ---
 
-## 🎯 Objetivos do Projeto
+# 📦 Produtos
+
+| Método | Rota          | Descrição             |
+| ------ | ------------- | --------------------- |
+| GET    | /produtos     | Listar produtos       |
+| GET    | /produtos/:id | Buscar produto por ID |
+| POST   | /produtos     | Criar produto         |
+| PUT    | /produtos/:id | Atualizar produto     |
+| DELETE | /produtos/:id | Remover produto       |
+
+---
+
+# 🧱 Arquitetura do Projeto
+
+O sistema foi organizado em camadas para facilitar manutenção, escalabilidade e testes:
+
+* **Controllers** → Controle das requisições HTTP
+* **Services** → Regras de negócio
+* **Middlewares** → Autenticação e tratamento de erros
+* **Routes** → Definição das rotas
+* **Types** → Centralização das tipagens
+* **Config** → Configuração do banco de dados
+
+---
+
+# 🎯 Objetivos do Projeto
 
 Este projeto foi desenvolvido com foco em:
 
-- Prática de **arquitetura backend em camadas**
-- Boas práticas com **TypeScript** e tipagem forte
-- Organização de **APIs REST**
-- **Autenticação segura** com JWT e bcrypt
-- Estrutura profissional para **portfólio**
+* Prática de arquitetura backend
+* Boas práticas com TypeScript
+* Organização de APIs REST
+* Autenticação segura
+* Testes automatizados
+* Estrutura profissional para portfólio
 
 ---
 
-## 👨‍💻 Autor
+# 👨‍💻 Autor
 
 Desenvolvido por **Giliarde Rodrigues** 💻
