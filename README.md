@@ -145,7 +145,7 @@ JWT_SECRET=sua_chave_secreta
 
 ### 4. Criar banco e tabelas
 
-Execute o script de criação das tabelas:
+As tabelas são criadas automaticamente pelo script src/criarTabelas.ts. Para executá-lo manualmente:
 
 ```bash
 npm run db:setup
