@@ -34,9 +34,6 @@ src/
  ├── criarTabelas.ts      # Script de criação das tabelas
  └── server.ts            # Inicialização do servidor
 
-sql/
- └── setup.sql            # Script de criação do banco e tabelas
-
 package.json
 tsconfig.json
 ```
